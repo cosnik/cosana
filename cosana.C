@@ -52,6 +52,7 @@ void cosana::fill_histograms(){
 void cosana::book_histograms(){
 
    _f = new TFile(outFile.c_str(),"RECREATE");
+
 //   TH1F *_nhit = new TH1F("nhit","nhit",10,-0.5,9.5);
 //   TH1F *_cost = new TH1F("cost","cost",1000,-1,1);
 //   TH1F *_dist = new TH1F("dist","dist",1000,0.,10.);
