@@ -39,13 +39,21 @@ void cosana::make_intersects(){
 }
 /*--------------------------------------------------------------------------------*/
 void cosana::fill_histograms(){
+   _nhit->Fill((Double_t)xp->size());
+
    for(Int_t ix=0; ix<(Int_t)intersects.size(); ix++){
+      
       intersect xing = intersects.at(ix);
+      _dist->Fill(xing.getDist());
+      _cost->Fill(xing.getCos());
+
       Double_t xx = xing.getPosition().x();
       Double_t yy = xing.getPosition().y();
       Double_t zz = xing.getPosition().z();
       _ip0_yz->Fill(yy,zz);
-      if(xing.getDist()<1.0 && xing.getCos()<0.999) _ip0_yz_cut->Fill(yy,zz);
+      if(xing.getDist()<0.2 && xing.getCos()<0.99995) {
+        _ip0_yz_cut->Fill(yy,zz);
+      }
    }
 }
 /*--------------------------------------------------------------------------------*/
@@ -53,13 +61,13 @@ void cosana::book_histograms(){
 
    _f = new TFile(outFile.c_str(),"RECREATE");
 
-//   TH1F *_nhit = new TH1F("nhit","nhit",10,-0.5,9.5);
-//   TH1F *_cost = new TH1F("cost","cost",1000,-1,1);
-//   TH1F *_dist = new TH1F("dist","dist",1000,0.,10.);
-//   TH2F *_xy0 = new TH2F("xy0","xy0",500,-500,500,500,-500,500);
-//   TH2F *_xy1 = new TH2F("xy1","xy1",500,-500,500,500,-500,500);
-//   TH2F *_xy2 = new TH2F("xy2","xy2",500,-500,500,500,-500,500);
-//   TH2F *_xy3 = new TH2F("xy3","xy3",500,-500,500,500,-500,500);
+   _nhit = new TH1F("nhit","nhit",10,-0.5,9.5);
+   _cost = new TH1F("cost","cost",1000,-1,1);
+   _dist = new TH1F("dist","dist",1000,0.,10.);
+   _xy0 = new TH2F("xy0","xy0",500,-500,500,500,-500,500);
+   _xy1 = new TH2F("xy1","xy1",500,-500,500,500,-500,500);
+   _xy2 = new TH2F("xy2","xy2",500,-500,500,500,-500,500);
+   _xy3 = new TH2F("xy3","xy3",500,-500,500,500,-500,500);
 
    _ip0_yz     = new TH2F("yz0","yz0",100,-200,200,100,-200,200);
    _ip0_yz_cut = new TH2F("yz0_cut","yz0_cut",100,-200,200,100,-200,200);
@@ -108,6 +116,9 @@ void cosana::Loop()
       // fill histograms
       //
       fill_histograms();
+      //
+      //
+      //
    } // end loop over events
    _f->Write();
 }

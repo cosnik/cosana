@@ -83,6 +83,13 @@ public :
    vector<intersect> intersects;
 
    TFile *_f;
+   TH1F *_nhit;
+   TH1F *_cost;
+   TH1F *_dist;
+   TH2F *_xy0;
+   TH2F *_xy1;
+   TH2F *_xy2;
+   TH2F *_xy3;
    TH2F *_ip0_yz;
    TH2F *_ip0_yz_cut;
 };
