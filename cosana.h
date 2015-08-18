@@ -76,6 +76,7 @@ public :
    void              book_histograms();
    void              fill_histograms();
    void              make_tracks();
+   void              make_sinogram();
    void              make_intersects();
    void              reset_variables();
 
@@ -83,6 +84,7 @@ public :
    vector<intersect> intersects;
 
    TFile *_f;
+   TTree *_out_tree;
    TH1F *_nhit;
    TH1F *_cost;
    TH1F *_dist;
@@ -92,6 +94,8 @@ public :
    TH2F *_xy3;
    TH2F *_ip0_yz;
    TH2F *_ip0_yz_cut;
+   TH2F *_testit;
+   TProfile2D *_sinogram;
 };
 
 #endif

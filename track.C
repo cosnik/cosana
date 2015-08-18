@@ -1,7 +1,7 @@
 #include "track.h"
 
 track::track(TVector3 x0, TVector3 x1, Int_t i){
-   // ctrack classification
+   // track classification
    itype = i;
 
    // position on the track
